@@ -1,4 +1,3 @@
-  
 from mongoengine import *
 from datetime import datetime
 from . item import Item
@@ -23,4 +22,4 @@ class UpgradeRequest(Document):
 
     # define class fields    
     user = ReferenceField(User)
-    status = StringField(required = True
+    status = StringField(required = True)

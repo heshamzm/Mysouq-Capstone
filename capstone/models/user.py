@@ -1,4 +1,3 @@
-  
 from mongoengine import *
 from datetime import datetime
 from .item import Item
@@ -10,6 +9,7 @@ class User(Document):
 
     # define class fields
     username = StringField(required = True, unique= True)
+    password = StringField(required = True)
     brithday = DateTimeField(required=True)
     email = EmailField(required=True)
     favorite = ListField(StringField())

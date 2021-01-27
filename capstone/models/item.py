@@ -1,6 +1,8 @@
 from mongoengine import *
 from datetime import datetime
-from . request import BuyRequest 
+
+# cirual error
+# from . request import BuyRequest 
 
 
 class Item(Document):
