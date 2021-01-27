@@ -1,7 +1,7 @@
 import os
 from flask import Flask
 from mongoengine import *
-from blog.models import *
+from capstone.models import *
 import json
 
 def create_app(test_config=None):

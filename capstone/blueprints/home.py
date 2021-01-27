@@ -2,7 +2,7 @@ from flask import Blueprint, render_template, request, redirect, session, flash 
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, validators, PasswordField
 from capstone.forms import LoginForm
-from capstone.models import User
+from capstone.models import user
 
 # define our blueprint
 home_bp = Blueprint('home', __name__)
