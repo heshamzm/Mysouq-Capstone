@@ -21,3 +21,17 @@ def create_app(test_config=None):
         password='example',
         authentication_source='admin'
     )
+
+    # register the 'login' blueprint
+    from .blueprints.login import login_bp
+    app.register_blueprint(login_bp)
+
+    # register the 'user' blueprint
+    from .blueprints.signup import signup_bp
+    app.register_blueprint(signup_bp)
+
+    # register the 'user' blueprint
+    from .blueprints.home import home_bp
+    app.register_blueprint(home_bp)
+
+    return app
