@@ -1,24 +1,32 @@
-<form method="POST" action="">
-    {{form.hidden_tag()}}
-    <div class="row my-3">
-      {{form.username.label(class_="form-label")}}
-      {{form.username(class_="form-control")}}
-    </div>
-    <div class="row my-3">
-      {{form.password.label(class_="form-label")}}
-      {{form.password(id_="username", class_="form-control")}}
-    </div>
+{% extends 'base.html' %}
 
-    <div class="row my-3">
-      {{form.birthday.label(class_="form-label")}}
-      {{form.birthday(class_="form-control")}}
-    </div>
+{% block main %}
+<div class="row my-5 mx-auto">
+  <div class="col-lg-4 col-md-6 col-sm-12">
+    <form method="POST" action="">
+      {{form.hidden_tag()}}
+      <div class="row my-3">
+        {{form.username.label}}
+        {{form.username}}
+      </div>
+      <div class="row my-3">
+        {{form.password.label}}
+        {{form.password}}
+      </div>
 
-    <div class="row my-3">
-      {{form.email.label(class_="form-label")}}
-      {{form.email(class_="form-control")}}
-    </div>
+      <div class="row my-3">
+        {{form.birthday.label}}
+        {{form.birthday}}
+      </div>
 
-    <hr class="mb-4" />
-    {{form.submit(class_="form-control bg-dark text-light")}}
-  </form>
+      <div class="row my-3">
+        {{form.email.label}}
+        {{form.email}}
+      </div>
+
+      <hr class="mb-4" />
+      {{form.submit}}
+    </form>
+  </div>
+</div>
+{% endblock %}

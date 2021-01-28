@@ -25,7 +25,7 @@ def login():
         user = User.objects(username=username).first()
 
         # check if credentials are valid
-        if (user) and (user.authenticate(username, password)):
+        if user and user.authenticate(username, password):
             session['user'] = user.serialize()
 
             # redirect the user after login
@@ -33,7 +33,7 @@ def login():
         else:
             # invalid credentials, redirect to login with error message
             flash("Login invalid. Please check your username and password.")
-            return redirect(url_for('login.login'))
+            return redirect(url_for('home.home'))
 
 
         return redirect("/profile")
