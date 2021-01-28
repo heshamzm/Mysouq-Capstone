@@ -21,11 +21,11 @@ def signup():
         
         # read values from the login wtform
         user.username = signup_form.username.data
-        user.firstname = signup_form.first_name.data
-        user.lastname = signup_form.last_name.data
+        user.firstname = signup_form.firstname.data
+        user.lastname = signup_form.lastname.data
         user.password = user.encrypt_password(signup_form.password.data)
         user.email = signup_form.email.data
-        user.brithday = signup_form.birthday.dataa
+        user.brithday = signup_form.birthday.data
 
         # save the user object
         user.save()
