@@ -13,6 +13,8 @@ class User(Document):
     username = StringField(required = True, unique= True)
     password = StringField(required = True)
     brithday = DateTimeField(required=True)
+    firstname = StringField(required = True)
+    lastname = StringField(required = True)
     email = EmailField(required=True)
     favorite = ListField(StringField())
     role = IntField(default = 0)
@@ -29,6 +31,11 @@ class User(Document):
     # encrypt the password
     def encrypt_password(self, password):
         return pbkdf2_sha256.hash(password)
+    
+     # this method changes the user password
+    def change_password(self, current_password, new_password):
+        if pbkdf2_sha256.verify(current_password, self.password):
+            self.password = self.encrypt_password(new_password)
 
 
     # this method serializes the object into a JSON object
@@ -37,6 +44,8 @@ class User(Document):
             "id": str(self.pk),
             'username': self.username,
             'password': 'nice try :)!',
+            'firstname' : self.firstname,
+            'lastname': self.lastname,
             'role': self.role,
             'email': self.email,
             'favorite': self.favorite,

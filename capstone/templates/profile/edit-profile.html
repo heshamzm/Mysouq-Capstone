@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 
+
 {% block main %}
 <div class="row my-5 mx-auto">
   <div class="col-lg-4 col-md-6 col-sm-12">
@@ -20,6 +21,10 @@
       <div class="row my-3">
         {{form.lastname.label}}
         {{form.lastname}}
+      </div>
+      <div class="row my-3">
+        {{form.username.label}}
+        {{form.username}}
       </div>
       <div class="row my-3">
         {{form.birthday.label}}
