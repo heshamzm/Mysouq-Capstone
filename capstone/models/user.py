@@ -16,7 +16,7 @@ class User(Document):
     firstname = StringField(required = True)
     lastname = StringField(required = True)
     email = EmailField(required=True)
-    favorite = ListField(StringField())
+    favorites = ListField(StringField())
     role = IntField(default = 0)
     disable = BooleanField(default = False)
 
@@ -48,7 +48,7 @@ class User(Document):
             'lastname': self.lastname,
             'role': self.role,
             'email': self.email,
-            'favorite': self.favorite,
+            'favorites': self.favorites,
             'disable': self.disable
         }
 
