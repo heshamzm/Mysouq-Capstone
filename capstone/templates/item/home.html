@@ -9,6 +9,10 @@
 {% block main %}
 
 <center>
+  <form action="{{ url_for('home.search_items') }}" method="POST">
+    <input class="form-control me-2" type="search" name="search_keyword" placeholder="Search" aria-label="Search">
+    <button class="btn btn-outline-success" type="submit">Search</button>
+  </form>
 
 
     {% for item in items %}

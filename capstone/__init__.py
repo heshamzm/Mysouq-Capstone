@@ -3,6 +3,10 @@ from flask import Flask
 from mongoengine import *
 from capstone.models import *
 import json
+from capstone.models.user import User
+from passlib.hash import pbkdf2_sha256
+from capstone.models.item import Item
+
 
 def create_app(test_config=None):
     # create the Flask
@@ -11,7 +15,7 @@ def create_app(test_config=None):
     # configure the app
     app.config.from_mapping(
         SECRET_KEY='dev',
-        MONGO_URI="mongodb://root:example@localhost:27017/blog?authSource=admin"
+        MONGO_URI="mongodb://root:example@localhost:27017/capstone?authSource=admin"
     )
 
     # connect to MongoDB using mongoengine
@@ -21,6 +25,21 @@ def create_app(test_config=None):
         password='example',
         authentication_source='admin'
     )
+
+    @app.route('/init-db')
+    def init_db():
+        
+        common_password = pbkdf2_sha256.hash('1234')
+
+        user_1 = User(username='Admin',password = common_password , birthday = "2009-12-30 14:09:01" , email = 'aaa@gmail.com' , firstname='Admin', lastname='Admin').save()
+
+        item_1 = Item(title = "First", description = 'First' ,date = "2009-12-30 14:09:01", price = "0" , category = "clothes").save()
+
+        item_2 = Item(title = "Sec" , description = 'First' ,date = "2020-12-30 14:09:01", price = "0" , category = "clothes").save()
+
+        item_3 = Item(title = "Third", description = 'First' ,date = "2011-12-30 14:09:01", price = "0" , category = "clothes").save()
+
+        return "Database initialized :)!"
 
     # register the blueprints
     from .blueprints.login import login_bp

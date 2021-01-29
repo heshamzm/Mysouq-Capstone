@@ -1,14 +1,22 @@
 from mongoengine import *
 from datetime import datetime
 
+
 # cirual error
 # from . request import BuyRequest 
 
 
-class Item(Document):
+class Item(DynamicDocument):
 
     # define class metadata
-    meta = {'collection' : 'item'}
+    meta = {'collection' : 'Items',
+             'indexes': [
+                {'fields': ['$title', '$description'],
+                 'default_language': 'english',
+                 'weights': {'title': 10, 'description': 2}
+                 }
+            ]
+            }
 
     # define class fields
     title = StringField(required = True)
@@ -19,3 +27,6 @@ class Item(Document):
     category = StringField(required = True)
     buy_request_list = ListField(StringField())
     hidden = BooleanField(default = False)
+
+
+   

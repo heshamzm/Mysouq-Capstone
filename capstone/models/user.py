@@ -12,7 +12,7 @@ class User(Document):
     # define class fields
     username = StringField(required = True, unique= True)
     password = StringField(required = True)
-    brithday = DateTimeField(required=True)
+    birthday = DateTimeField(required=True)
     firstname = StringField(required = True)
     lastname = StringField(required = True)
     email = EmailField(required=True)

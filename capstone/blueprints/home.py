@@ -15,3 +15,14 @@ def home():
     items = Item.objects()
 
     return render_template('item/home.html', items = items)
+
+
+@home_bp.route("/item/search", methods=['POST'])
+def search_items():
+    
+    if request.method == 'POST':
+        
+        search_keyword = str(request.form['search_keyword'])  
+        results = Item.objects.search_text(search_keyword).order_by('$text_score')
+        
+        return render_template("item/search-result.html" , items = results , search_keyword = search_keyword)
