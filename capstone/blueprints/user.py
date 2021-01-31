@@ -1,17 +1,60 @@
 from flask import Blueprint, render_template, request, redirect, session, flash , url_for
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, validators, PasswordField
 from capstone.forms.editprofileform import EditProfile , ChangePasswordForm
-from capstone.forms.additemform import AddItemForm
 from capstone.models.user import User
 from capstone.models.item import Item
 from bson import ObjectId
+from functools import wraps
 
 
 # define our blueprint
 user_bp = Blueprint('user', __name__)
 
+# define the decorator
+def login_required(function):
+    @wraps(function)
+    def check_required(*args, **kwargs):
+
+        if  session['user']['id'] :
+            return function(*args, **kwargs)
+
+        else:
+            return redirect(url_for('login.login'))
+
+    return check_required
+
+
+def disable_user(function):
+    @wraps(function)
+    def check(*args, **kwargs):
+
+        if session['user']['disable'] == False:
+            return function(*args, **kwargs)
+
+        else:
+            return render_template('user/disable.html')
+    return check
+
+
+def maintenance(function):
+    @wraps(function)
+    def check(*args, **kwargs):
+
+        if session['user']['maintenance'] == False:
+            return function(*args, **kwargs)
+
+        else:
+            return render_template('user/maintenance.html')
+    return check
+
+
+
+
+
 @user_bp.route('/user/edit_profile', methods=['POST', 'GET'])
+@maintenance
+@login_required
+@disable_user
 def edit_profile_user():
     user = User.objects(id = session["user"]['id']).first()
 
@@ -42,6 +85,9 @@ def edit_profile_user():
 
 
 @user_bp.route('/user/change_password', methods=['GET', 'POST'])
+@maintenance
+@login_required
+@disable_user
 def change_password():
 
     user = User.objects(id=session['user']['id']).first()
@@ -62,24 +108,6 @@ def change_password():
 
     return render_template("profile/change-password.html", form=change_password_form)
 
-@user_bp.route('/user/add_item', methods=['GET', 'POST'])
-def add_item():
 
-    add_item_form = AddItemForm()
 
-    if add_item_form.validate_on_submit():
 
-        title = add_item_form.title.data
-        description = add_item_form.description.data
-        price = add_item_form.price.data
-        category = add_item_form.category.data
-
-        new_item = Item(title = title, description = description, price = price, category = category)
-        
-        new_item.save()
-
-        flash("Your item has been successfully added.")
-
-        return redirect(url_for('home.home'))
-
-    return render_template("item/add-item.html", form = add_item_form)

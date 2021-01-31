@@ -19,6 +19,7 @@ class User(Document):
     favorites = ListField(StringField())
     role = IntField(default = 0)
     disable = BooleanField(default = False)
+    maintenance = BooleanField(default = False)
 
     # check the password validation
     def authenticate(self, username, password):
@@ -28,6 +29,7 @@ class User(Document):
             return True
         else:
             return False
+
     # encrypt the password
     def encrypt_password(self, password):
         return pbkdf2_sha256.hash(password)
@@ -49,7 +51,8 @@ class User(Document):
             'role': self.role,
             'email': self.email,
             'favorites': self.favorites,
-            'disable': self.disable
+            'disable': self.disable,
+            'maintenance' : self.maintenance
         }
 
         return serialized        

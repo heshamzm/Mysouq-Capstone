@@ -31,7 +31,9 @@ def create_app(test_config=None):
         
         common_password = pbkdf2_sha256.hash('1234')
 
-        user_1 = User(username='Admin',password = common_password , birthday = "2009-12-30 14:09:01" , email = 'aaa@gmail.com' , firstname='Admin', lastname='Admin').save()
+        user_1 = User(username='Admin',password = common_password , birthday = "2009-12-30 14:09:01" , email = 'aaa@gmail.com', role = 2 , firstname='Admin', lastname='Admin').save()
+        user_1 = User(username='hesham',password = common_password , birthday = "2009-12-30 14:09:01" , email = 'aaa@gmail.com', role = 0 , firstname='hesham', lastname='marei').save()
+        user_1 = User(username='hamza',password = common_password , birthday = "2009-12-30 14:09:01" , email = 'aaa@gmail.com', role = 1 , firstname='hamza', lastname='radaideh').save()
 
         item_1 = Item(title = "First", description = 'First' ,date = "2009-12-30 14:09:01", price = "0" , category = "clothes").save()
 
@@ -55,5 +57,8 @@ def create_app(test_config=None):
 
     from .blueprints.user import user_bp
     app.register_blueprint(user_bp)
+
+    from .blueprints.profile import profile_bp
+    app.register_blueprint(profile_bp)
 
     return app
