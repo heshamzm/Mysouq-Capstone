@@ -83,7 +83,12 @@ def view_favorite():
 
     favorite_items = User.objects(id = session['user']['id']).get().favorites
     print(favorite_items)
-    items = Item.objects(ObjectId = favorite_items)
-    print(items)
+    items = []
+    for i in range(0 ,len(favorite_items)):
+
+        item = Item.objects(id = favorite_items[i]).first()
+        items.append(item)
+        print(items)
+        
     
     return render_template("profile/user-favorite.html" , items = items)
