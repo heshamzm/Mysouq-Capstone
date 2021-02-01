@@ -82,7 +82,8 @@ def remove_maintenance_mode() :
 def view_favorite():
 
     favorite_items = User.objects(id = session['user']['id']).get().favorites
-    items = Item.objects(Objectid = favorite_items)
-    # print(favorite_items)
-
+    print(favorite_items)
+    items = Item.objects(ObjectId = favorite_items)
+    print(items)
+    
     return render_template("profile/user-favorite.html" , items = items)
