@@ -1,5 +1,6 @@
 from mongoengine import *
 from datetime import datetime
+from .user import User
 
 
 # cirual error
@@ -19,6 +20,7 @@ class Item(DynamicDocument):
             }
 
     # define class fields
+    user = ReferenceField(User)
     title = StringField(required = True)
     description = StringField(required = True)
     date = DateTimeField(default = datetime.now())
@@ -27,6 +29,13 @@ class Item(DynamicDocument):
     category = StringField(required = True)
     buy_request_list = ListField(StringField())
     hidden = BooleanField(default = False)
+
+class Category(Document):
+
+    meta = {'collection' : 'Categories'}
+
+    value = StringField(required = True)
+    label = StringField(required = True)
 
 
    

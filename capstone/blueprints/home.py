@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, request, redirect, session, flash , url_for
 from flask_wtf import FlaskForm
 from capstone.models.user import User
-from capstone.models.item import Item
+from capstone.models.item import Item , Category
 from capstone.models.request import BuyRequest
 from capstone.forms.items import AddItemForm , EditItemForm
 from capstone.blueprints.user import disable_user , login_required , maintenance
@@ -43,6 +43,10 @@ def add_item():
 
     add_item_form = AddItemForm()
 
+    categories = Category.objects()
+
+    add_item_form.category.choices = [(category.value, category.label) for category in categories]
+
     if add_item_form.validate_on_submit():
 
         title = add_item_form.title.data
@@ -50,7 +54,7 @@ def add_item():
         price = add_item_form.price.data
         category = add_item_form.category.data
 
-        new_item = Item(title = title, description = description, price = price, category = category)
+        new_item = Item(user = session['user']['id'] , title = title, description = description, price = price, category = category)
         
         new_item.save()
 
@@ -68,6 +72,10 @@ def edit_item(item_id):
 
     edit_item_form = EditItemForm()
 
+    categories = Category.objects()
+
+    edit_item_form.category.choices = [(category.value, category.label) for category in categories]
+
     item = Item.objects(id = item_id).first()
 
     if request.method == "GET":
@@ -75,15 +83,14 @@ def edit_item(item_id):
         edit_item_form.new_title.data = item.title
         edit_item_form.new_description.data = item.description
         edit_item_form.new_price.data = item.price
-        edit_item_form.new_category.data = item.category
-
+        edit_item_form.category.data = item.category
 
     if edit_item_form.validate_on_submit():
 
         item.title = edit_item_form.new_title.data
         item.description = edit_item_form.new_description.data
         item.price = edit_item_form.new_price.data
-        item.category = edit_item_form.new_category.data
+        item.category = edit_item_form.category.data
         
         item.save()
 
