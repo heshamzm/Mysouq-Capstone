@@ -19,7 +19,7 @@
   <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
     <ul class="navbar-nav ml-6 topnav">
       <li class="nav-item">
-        <a class="navbar-brand" href="#"><i class="far fa-flag"></i> My Souq</a>
+        <h1 class="navbar-brand" ><i class="far fa-flag"></i> My Souq</h1>
       </li>
       {% if session ['user'] %}
       <li class="nav-item">
@@ -36,11 +36,11 @@
 
     <ul class="navbar-nav ml-auto topnav">
       {% if not session ['user'] %}
-      <li class="nav-item">
-        <a type="button" href="{{url_for('login.login')}}" role="button" class="btn btn-success">Log in</a>
+      <li class="nav-item mr-1">
+        <a type="button" href="{{url_for('login.login')}}" role="button" class="btn btn-success">Log in </a>
       </li>
       <li class="nav-item">
-        <a type="button" href="{{url_for('signup.signup')}}" role="button" class="btn btn-info">Sign up</a>
+        <a type="button" href="{{url_for('signup.signup')}}" role="button" class="btn btn-info"> Sign up</a>
       </li>
       {% endif %} 
       {% if session ['user'] %}
