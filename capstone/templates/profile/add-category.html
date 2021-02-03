@@ -5,7 +5,36 @@
 <!-- content block -->
 {% block main %}
 
-<!-- edit user -->
+<center>
+    <div>
+        <div class="col-lg-4 col-md-6 col-sm-12">
+            <h2><i class="{{icon}}"></i> {{title}}</h2>
+        </div>
+    </div>
+    <hr>
+
+
+<div id="b1">
+  <div class="col-lg-4 col-md-6 col-sm-12">
+    <form method="POST" action="">
+      {{form.hidden_tag()}}
+      <div class="row my-3">
+        {{form.value.label}}
+        {{form.value}}
+      </div>
+      <div class="row my-3">
+        {{form.label.label)}}
+        {{form.label}}
+      </div>
+
+      <hr class="mb-4" />
+      {{form.submit}}
+      
+    </form>
+
+  </div>
+</div>
+</center>
 
 
 {% endblock %}

@@ -120,7 +120,7 @@ def disabled_list():
 
     users = User.objects(disable = True)
 
-    return render_template('profile/blocked_list.html' , users = users, title = "Blocked-List" , icon = 'fas fa-users')
+    return render_template('profile/blocked-list.html' , users = users, title = "Blocked-List" , icon = 'fas fa-users')
     
 
 @profile_bp.route('/buy_request_list/<user_id>', methods=['POST', 'GET'])
@@ -132,7 +132,7 @@ def buy_request_list(user_id):
 
     list_request = BuyRequest.objects(user = session['user']['id'])
 
-    return render_template('profile/buy_request_list.html'  , list_request = list_request)
+    return render_template('profile/buy-request-list.html'  , list_request = list_request)
 
 
 @profile_bp.route('/request_upgrade', methods=['GET', 'POST'])
@@ -178,4 +178,4 @@ def add_category():
 
         return redirect(url_for("profile.profile"))
 
-    return render_template("profile/add_category.html", form = add_category_form)
+    return render_template("profile/add-category.html", form = add_category_form)
