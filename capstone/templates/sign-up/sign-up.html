@@ -3,7 +3,9 @@
 {% block main %}
 <center>
   <div class="class=col-lg-4 col-md-6 col-sm-12">
+    <br>
     <form method="POST" action="">
+      <br>
       {{form.hidden_tag()}}
       <div class="row my-3">
         {{form.username.label(class_="input-group-text")}}
@@ -31,11 +33,13 @@
         {{form.email( class_="form-control")}}
       </div>
 
-      <hr class="mb-4" />
+      
       {{form.submit(class_="btn btn-outline-secondary")}}
 
     </form>
   </div>
+  
+  <br>
   <br>
   <br>
 </center>
