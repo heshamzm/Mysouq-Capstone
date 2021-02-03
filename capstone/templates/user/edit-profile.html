@@ -1,44 +1,24 @@
 {% extends 'base.html' %}
 
+{% block header %}
+<h1>{% block title %}Edit-profile{% endblock %}</h1>
+{% endblock %}
 
 {% block main %}
-<div class="row my-5 mx-auto">
-  <div class="col-lg-4 col-md-6 col-sm-12">
-    <form method="POST" action="">
-      {{form.hidden_tag()}}
-      <div class="row my-3">
-        {{form.username.label}}
-        {{form.username}}
-      </div>
-      <div class="row my-3">
-        {{form.password.label}}
-        {{form.password}}
-      </div>
-      <div class="row my-3">
-        {{form.firstname.label}}
-        {{form.firstname}}
-      </div>
-      <div class="row my-3">
-        {{form.lastname.label}}
-        {{form.lastname}}
-      </div>
-      <div class="row my-3">
-        {{form.username.label}}
-        {{form.username}}
-      </div>
-      <div class="row my-3">
-        {{form.birthday.label}}
-        {{form.birthday}}
-      </div>
-
-      <div class="row my-3">
-        {{form.email.label}}
-        {{form.email}}
-      </div>
-
-      <hr class="mb-4" />
-      {{form.submit}}
-    </form>
-  </div>
+<h1><b>Edit Profile</b></h1>
+<div class="class=col-lg-4 col-md-6 col-sm-12">
+  <form method="POST" action="">
+    {{form.hidden_tag()}}
+    <div class="row my-3">
+      {{form.firstname.label(class_="input-group-text")}}
+      {{form.firstname( class_="form-control")}}
+    </div>
+    <div class="row my-3">
+      {{form.lastname.label(class_="input-group-text")}}
+      {{form.lastname( class_="form-control")}}
+    </div>
+    {{form.submit}}
+  </form>
 </div>
+
 {% endblock %}

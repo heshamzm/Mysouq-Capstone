@@ -9,38 +9,40 @@
 {% block main %}
 
 <center>
-  <form action="{{ url_for('home.search_items') }}" method="POST">
-    <input class="form-control me-2" type="search" name="search_keyword" placeholder="Search" aria-label="Search">
-    <button class="btn btn-outline-success" type="submit">Search</button>
+  <form action="{{ url_for('home.search_items') }}" placeholder="Search" method="POST">
+    <div class="input-group mb-3">
+      <input class="form-control" type="search" name="search_keyword" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-secondary" type="submit">Search</button>
+    </div>
   </form>
 
 
-    {% for item in items %}
-  
-    <div class="card" style="width: 18rem;">
-      <img class="card-img-top" src="../../static/images/haha.jpg" alt="Card image cap">
-      <div class="card-body">
-        <h5 class="card-title">
-          <h5><b>HRD-Souq.com</b></h5>
-        </h5>
-        <hr style="height:2px;border-width:0;color:gray;background-color:gray">
-        <p class="card-text">
-        <h5><b>Title : </b>{{item.title}}</h5>
-        <hr style="height:2px;border-width:0;color:gray;background-color:gray">
-        <h5><b>Description : </b>{{item.description}}</h5>
-        <hr style="height:2px;border-width:0;color:gray;background-color:gray">
-        <h5><b>Price : </b> {{item.price}} JDs </h5>
-        <hr style="height:2px;border-width:0;color:gray;background-color:gray">
-        </p>
-        <a href="{{url_for('home.buy_item' , item_id = item.id)}}" class="btn btn-primary text-white">Buy</a>
-        <a href = "{{url_for('home.add_favorite' , item_id = item.id)}}"><i class="fas fa-star" title="Favorite"></i></a>
-      </div>
+  {% for item in items %}
+
+  <div class="card" style="width: 18rem;">
+    <img class="card-img-top" src="../../static/images/haha.jpg" alt="Card image cap">
+    <div class="card-body">
+      <h5 class="card-title">
+        <h5><b>HRD-Souq.com</b></h5>
+      </h5>
+      <hr style="height:2px;border-width:0;color:gray;background-color:gray">
+      <p class="card-text">
+      <h5><b>Title : </b>{{item.title}}</h5>
+      <hr style="height:2px;border-width:0;color:gray;background-color:gray">
+      <h5><b>Description : </b>{{item.description}}</h5>
+      <hr style="height:2px;border-width:0;color:gray;background-color:gray">
+      <h5><b>Price : </b> {{item.price}} JDs </h5>
+      <hr style="height:2px;border-width:0;color:gray;background-color:gray">
+      </p>
+      <a href="{{url_for('home.buy_item' , item_id = item.id)}}" class="btn btn-primary text-white">Buy</a>
+      <a href="{{url_for('home.add_favorite' , item_id = item.id)}}"><i class="fas fa-star" title="Favorite"></i></a>
     </div>
-  
-    {% endfor %}
-  
-  
-  
-  </center>
+  </div>
+
+  {% endfor %}
+
+
+
+</center>
 
 {% endblock %}}

@@ -1,39 +1,33 @@
 {% extends 'base.html' %}
 <!-- title -->
-{% block title %}Profile-Page{% endblock %}
+{% block title %}Add-Category{% endblock %}
 
 <!-- content block -->
 {% block main %}
 
 <center>
-    <div>
-        <div class="col-lg-4 col-md-6 col-sm-12">
-            <h2><i class="{{icon}}"></i> {{title}}</h2>
-        </div>
-    </div>
-    <hr>
 
 
-<div id="b1">
-  <div class="col-lg-4 col-md-6 col-sm-12">
+  <h1><b>Add Category</b></h1>
+  <div class="class=col-lg-4 col-md-6 col-sm-12">
     <form method="POST" action="">
       {{form.hidden_tag()}}
       <div class="row my-3">
-        {{form.value.label}}
-        {{form.value}}
+        {{form.value.label(class_="input-group-text")}}
+        {{form.value(class_="form-control")}}
       </div>
       <div class="row my-3">
-        {{form.label.label)}}
-        {{form.label}}
+        {{form.label.label(class_="input-group-text")}}
+        {{form.label(class_="form-control")}}
       </div>
 
-      <hr class="mb-4" />
-      {{form.submit}}
+      
+      {{form.submit(class_="btn btn-outline-secondary")}}
       
     </form>
 
   </div>
-</div>
+
 </center>
 
 

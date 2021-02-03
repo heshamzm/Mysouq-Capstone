@@ -7,29 +7,32 @@
 
 <!-- content block -->
 {% block main %}
-<form method="POST" action="">
-    {{form.hidden_tag()}}
-    <div class="row my-3">
-      {{form.title.label}}
-      {{form.title}}
-    </div>
-    <div class="row my-3">
-      {{form.description.label}}
-      {{form.description}}
-    </div>
-    <div class="row my-3">
-      {{form.price.label}}
-      {{form.price}}
-    </div>
-    <div class="row my-3">
-      {{form.category.label}}
-      {{form.category}}
-    </div>
-
-    <hr class="mb-4" />
-    {{form.submit}}
-
-  </form>
+<center>
+  <h1><b>Add Item</b></h1>
+  <div class="class=col-lg-4 col-md-6 col-sm-12">
+    <form method="POST" action="">
+      {{form.hidden_tag()}}
+      <div class="row my-3">
+        {{form.title.label(class_="input-group-text")}}
+        {{form.title(class_="form-control"}}
+      </div>
+      <div class="row my-3">
+        {{form.description.label(class_="input-group-text")}}
+        {{form.description(class_="form-control"}}
+      </div>
+      <div class="row my-3">
+        {{form.price.label(class_="input-group-text")}}
+        {{form.price(class_="form-control"}}
+      </div>
+      <div class="row my-3">
+        {{form.category.label(class_="input-group-text")}}
+        {{form.category(class_="form-control"}}
+      </div>
 
 
+      {{form.submit(class_="btn btn-outline-secondary")}}
+
+    </form>
+  </div>
+</center>
 {% endblock %}
