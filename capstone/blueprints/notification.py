@@ -52,9 +52,9 @@ def approve_buy_request(item_id,request_id ):
     return redirect(url_for('notifications.view_buy_request'))
 
 @notification_bp.route('/notification/<item_id>/decline_request/<request_id>', methods=['POST', 'GET'])
-# @maintenance
-# @login_required
-# @disable_user
+@maintenance
+@login_required
+@disable_user
 def decline_request(item_id,request_id):
 
    
@@ -71,24 +71,12 @@ def decline_request(item_id,request_id):
 
 # upgrade requests functions
 
-@notification_bp.route('/upgrade_request', methods=['POST', 'GET'])
-# @maintenance
-# @login_required
-# @disable_user
-def upgrade_request():
 
-    upgrade_request = UpgradeRequest(user = session['user']['id'], status = "Pending")
-
-    upgrade_request.save()
-
-    flash("Upgrade Request has been sent.")
-
-    return redirect(url_for("profile.profile"))
 
 @notification_bp.route('/review_upgrade_requests', methods=['POST', 'GET'])
-# @maintenance
-# @login_required
-# @disable_user
+@maintenance
+@login_required
+@disable_user
 def review_upgrade_requests():
 
     users = User.objects()

@@ -2,24 +2,33 @@
 
 {% block main %}
 <center>
-   <div class="row my-5 mx-auto">
-    <div class="col-lg-4 col-md-6 col-sm-12">
-      <form method="POST" action="">
-        {{form.hidden_tag()}}
-        <div class="mb-3">
-          {{form.username.label}}
-          {{form.username(id_="username")}}
-        </div>
-        <div class="mb-3">
-          {{form.password.label}}
-          {{form.password(id_="username")}}
-        </div>
-        <div class="row my-3">
-          {{form.submit}}
-        </div>
-        <h6><strong>Don't have an account ?</strong><a href="{{url_for('signup.signup')}}"> Sign Up</a> </h6>
-      </form>
-    </div>
+  <div class="class=col-lg-4 col-md-6 col-sm-12">
+    <form method="POST" action="">
+      {{form.hidden_tag()}}
+      <div class="row my-3">
+        {{form.username.label(class_="input-group-text")}}
+        {{form.username( class_="form-control")}}
+      </div>
+      <div class="row my-3">
+        {{form.password.label(class_="input-group-text")}}
+        {{form.password(class_="form-control")}}
+
+      </div>
+      {{form.submit(class_="btn btn-outline-secondary")}}
+      <br>
+      <br>
+      <h6><strong>Don't have an account ?</strong><a href="{{url_for('signup.signup')}}"> Sign Up</a> </h6>
+    </form>
   </div>
+  <br>
+  <br><br>
+  <br><br>
+  <br><br>
+  <br><br>
+  <br><br>
+  <br><br>
+  <br><br>
+  <br>
+
 </center>
 {% endblock %}

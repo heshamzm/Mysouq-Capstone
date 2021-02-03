@@ -1,39 +1,43 @@
 {% extends 'base.html' %}
 
 {% block main %}
-<div class="row my-5 mx-auto">
-  <div class="col-lg-4 col-md-6 col-sm-12">
+<center>
+  <div class="class=col-lg-4 col-md-6 col-sm-12">
     <form method="POST" action="">
       {{form.hidden_tag()}}
       <div class="row my-3">
-        {{form.username.label}}
-        {{form.username}}
+        {{form.username.label(class_="input-group-text")}}
+        {{form.username( class_="form-control")}}
       </div>
       <div class="row my-3">
-        {{form.password.label}}
-        {{form.password}}
+        {{form.password.label( class_="input-group-textl")}}
+        {{form.password( class_="form-control")}}
       </div>
       <div class="row my-3">
-        {{form.firstname.label}}
-        {{form.firstname}}
+        {{form.firstname.label( class_="input-group-text")}}
+        {{form.firstname( class_="form-control")}}
       </div>
       <div class="row my-3">
-        {{form.lastname.label}}
-        {{form.lastname}}
+        {{form.lastname.label( class_="input-group-text")}}
+        {{form.lastname( class_="form-control")}}
       </div>
       <div class="row my-3">
-        {{form.birthday.label}}
-        {{form.birthday}}
+        {{form.birthday.label( class_="input-group-text")}}
+        {{form.birthday( class_="form-control")}}
       </div>
 
       <div class="row my-3">
-        {{form.email.label}}
-        {{form.email}}
+        {{form.email.label( class_="input-group-text")}}
+        {{form.email( class_="form-control")}}
       </div>
 
       <hr class="mb-4" />
-      {{form.submit}}
+      {{form.submit(class_="btn btn-outline-secondary")}}
+
     </form>
   </div>
-</div>
+  <br>
+  <br>
+</center>
+
 {% endblock %}
