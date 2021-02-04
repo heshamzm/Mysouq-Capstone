@@ -12,8 +12,8 @@ home_bp = Blueprint('home', __name__)
 
 
 @home_bp.route('/home', methods=['POST', 'GET'])
-@maintenance
 @login_required
+@maintenance
 @disable_user
 def home():
 
@@ -25,8 +25,8 @@ def home():
 
 
 @home_bp.route("/item/search", methods=['POST'])
-@maintenance
 @login_required
+@maintenance
 @disable_user
 def search_items():
     
@@ -38,8 +38,8 @@ def search_items():
         return render_template("item/search-result.html" , items = results , search_keyword = search_keyword)
 
 @home_bp.route('/user/add_item', methods=['GET', 'POST'])
-@maintenance
 @login_required
+@maintenance
 @disable_user
 def add_item():
 
@@ -67,9 +67,9 @@ def add_item():
     return render_template("item/add-item.html", form = add_item_form)
 
 @home_bp.route('/user/edit_item/<item_id>', methods=['GET', 'POST'])
-# @maintenance
-# @login_required
-# @disable_user
+@login_required
+@maintenance
+@disable_user
 def edit_item(item_id):
 
     edit_item_form = EditItemForm()
@@ -115,8 +115,8 @@ def edit_item(item_id):
 
 
 @home_bp.route('/user/delete_item/<item_id>', methods=['GET', 'POST'])
-@maintenance
 @login_required
+@maintenance
 @disable_user
 def delete_item(item_id):
 
@@ -141,8 +141,8 @@ def delete_item(item_id):
 
 
 @home_bp.route('/sort-item/date', methods=['GET', 'POST'])
-@maintenance
 @login_required
+@maintenance
 @disable_user
 def sort_date_items():
 
@@ -151,8 +151,8 @@ def sort_date_items():
     return render_template("item/home.html" , items = items)  
 
 @home_bp.route('/sort-item/price', methods=['GET', 'POST'])
-@maintenance
 @login_required
+@maintenance
 @disable_user
 def sort_price_items():
 
@@ -162,8 +162,8 @@ def sort_price_items():
 
 
 @home_bp.route('/item/<item_id>/buy')
-@maintenance
 @login_required
+@maintenance
 @disable_user
 def buy_item(item_id):
 
@@ -188,8 +188,8 @@ def buy_item(item_id):
 
 
 @home_bp.route('/item/<item_id>/favorite')
-@maintenance
 @login_required
+@maintenance
 @disable_user
 def add_favorite(item_id):
     # Add post ID to favorites list
@@ -200,8 +200,8 @@ def add_favorite(item_id):
 
 @home_bp.route('/item/<item_id>/remove_favorite')
 @login_required
-@disable_user
 @maintenance
+@disable_user
 def remove_from_favorite(item_id):
 
     User.objects(id = session['user']['id']).update_one(pull__favorite = item_id)

@@ -12,8 +12,8 @@ profile_bp = Blueprint('profile', __name__)
 
 @profile_bp.route("/" , methods = ['POST' , 'GET'])
 @profile_bp.route('/profile', methods=['POST', 'GET'])
-@maintenance
 @login_required
+@maintenance
 @disable_user
 def profile():
 
@@ -22,8 +22,8 @@ def profile():
     return render_template('profile/profile.html' , user = user)
 
 @profile_bp.route('/display-users', methods=['POST', 'GET'])
-@maintenance
 @login_required
+@maintenance
 @disable_user
 def display_users():
     
@@ -36,8 +36,8 @@ def display_users():
 
 
 @profile_bp.route('/remove_user/<user_id>', methods=['POST', 'GET'])
-@maintenance
 @login_required
+@maintenance
 @disable_user
 def remove_user(user_id):
 
@@ -46,8 +46,8 @@ def remove_user(user_id):
     return redirect(url_for('profile.display_users'))
 
 @profile_bp.route('/disable_user/<user_id>', methods=['POST', 'GET'])
-@maintenance
 @login_required
+@maintenance
 @disable_user    
 def disable_user_list(user_id) :
     
@@ -61,8 +61,8 @@ def disable_user_list(user_id) :
 
 @profile_bp.route('/unlock_disable_user/<user_id>', methods=['POST', 'GET'])
 @login_required
-@disable_user
-@maintenance    
+@maintenance 
+@disable_user   
 def unlock_disable_user_user_list(user_id) :
     
     user = User.objects(id = user_id).first()
@@ -77,8 +77,8 @@ def unlock_disable_user_user_list(user_id) :
     return redirect(url_for('profile.display_users'))
 
 @profile_bp.route('/profile/maintenance', methods=['POST', 'GET'])
+@maintenance 
 @maintenance
-@login_required
 @disable_user    
 def maintenance_mode() :
 
@@ -88,8 +88,8 @@ def maintenance_mode() :
 
 
 @profile_bp.route('/profile/remove_maintenance_mode', methods=['POST', 'GET'])
-@maintenance
 @login_required
+@maintenance
 @disable_user    
 def remove_maintenance_mode() :
     
@@ -98,8 +98,8 @@ def remove_maintenance_mode() :
     return redirect(url_for('profile.profile'))
 
 @profile_bp.route('/user/favorite_list', methods=['GET', 'POST'])
-@maintenance
 @login_required
+@maintenance
 @disable_user
 def view_favorite():
 
@@ -117,8 +117,8 @@ def view_favorite():
 
 @profile_bp.route('/disable_users_list', methods=['POST', 'GET'])
 @login_required
-@disable_user
 @maintenance  
+@disable_user
 def disabled_list():
 
     users = User.objects(disable = True)
@@ -128,8 +128,8 @@ def disabled_list():
 
 @profile_bp.route('/buy_request_list/<user_id>', methods=['POST', 'GET'])
 @login_required
-@disable_user
-@maintenance 
+@maintenance
+@disable_user 
 def buy_request_list(user_id):
 
 
@@ -140,8 +140,8 @@ def buy_request_list(user_id):
 
 @profile_bp.route('/request_upgrade', methods=['GET', 'POST'])
 @login_required
-@disable_user
 @maintenance 
+@disable_user
 def request_upgrade():
 
     request = UpgradeRequest.objects(user = session['user']['id']).first()
@@ -161,8 +161,8 @@ def request_upgrade():
 
 @profile_bp.route('/add_category', methods=['GET', 'POST'])
 @login_required
-@disable_user
 @maintenance
+@disable_user
 def add_category():
 
     add_category_form = AddCategoryForm()

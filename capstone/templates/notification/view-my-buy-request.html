@@ -9,50 +9,56 @@
 <center>
   <div class="container">
     <div class="row align-items-start">
-{% for item_requests in my_buy_requests  %}
-{% for request in item_requests %}
-<div class="col">
-<br>
-<br>
-<br>
-<h1><b>Buy Requests</b></h1>
-<br>
+      {% for item_requests in my_buy_requests %}
+      {% for request in item_requests %}
+      <div class="col">
+        
+        <br>
+        <br>
+        <h1><b>Buy Requests</b></h1>
+        <br>
 
-      <div class="card" style="width: 18rem;">
-        <img class="card-img-top" src="../../static/1.jpg" alt="Card image cap">
-        <div class="card-body">
-          <h5 class="card-title">
-            <h5><b>HRD-Souq.com</b></h5>
-          </h5>
-          <hr style="height:2px;border-width:0;color:gray;background-color:gray">
-          <p class="card-text">
-          <h5><b>Buyer : </b>{{request.user.username}}</h5>
-          <hr style="height:2px;border-width:0;color:gray;background-color:gray">
-          <h5><b>Title : </b>{{request.item.title}}</h5>
-          <hr style="height:2px;border-width:0;color:gray;background-color:gray">
-          <h5><b>Price : </b> {{request.item.price}} JDs </h5>
-          <hr style="height:2px;border-width:0;color:gray;background-color:gray">
-          <h5><b>Status : </b> {{request.status}}</h5>
-          <hr style="height:2px;border-width:0;color:gray;background-color:gray">
-          </p>
-          <a href="{{url_for('notification.approve_buy_request' ,item_id = request.item.id , request_id = request.id)}}"
-            class="btn btn-outline-secondary">Approve</a>
+        <div class="card" style="width: 18rem;">
+          <img class="card-img-top" src="../../static/1.jpg" alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title">
+              <h5><b>HRD-Souq.com</b></h5>
+            </h5>
+            <hr style="height:2px;border-width:0;color:gray;background-color:gray">
+            <p class="card-text">
+            <h5><b>Buyer : </b>{{request.user.username}}</h5>
+            <hr style="height:2px;border-width:0;color:gray;background-color:gray">
+            <h5><b>Title : </b>{{request.item.title}}</h5>
+            <hr style="height:2px;border-width:0;color:gray;background-color:gray">
+            <h5><b>Price : </b> {{request.item.price}} JDs </h5>
+            <hr style="height:2px;border-width:0;color:gray;background-color:gray">
+            <h5><b>Status : </b> {{request.status}}</h5>
+            <hr style="height:2px;border-width:0;color:gray;background-color:gray">
+            </p>
+            <a href="{{url_for('notification.approve_buy_request' ,item_id = request.item.id , request_id = request.id)}}"
+              class="btn btn-outline-secondary">Approve</a>
 
-          <a href="{{url_for('notification.decline_request' ,item_id = request.item.id , request_id = request.id)}}"
-            class="btn btn-outline-danger">Decline</a>
-          
+            <a href="{{url_for('notification.decline_request' ,item_id = request.item.id , request_id = request.id)}}"
+              class="btn btn-outline-danger">Decline</a>
+          </div>
         </div>
+        <br>
+        <br>
+        <br>
+        <br>
       </div>
-    </div>
-    
 
-{% endfor %}
-{% endfor %}
-</div>
-</div>
-<br>
-<br>
-<br>
+
+
+
+
+      {% endfor %}
+      {% endfor %}
+    </div>
+  </div>
+  <br>
+  <br>
+  <br>
 </center>
 
 

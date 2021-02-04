@@ -44,7 +44,7 @@ class User(Document):
         serialized = {
             "id": str(self.pk),
             'username': self.username,
-            'password': 'nice try :)!',
+            'password': 'Cant help you bro :*',
             'firstname' : self.firstname,
             'lastname': self.lastname,
             'role': self.role,

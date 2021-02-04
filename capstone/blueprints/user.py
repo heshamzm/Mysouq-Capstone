@@ -62,9 +62,9 @@ def maintenance(function):
 
 
 @user_bp.route('/user/edit_profile', methods=['POST', 'GET'])
-# @maintenance
-# @login_required
-# @disable_user
+@maintenance
+@login_required
+@disable_user
 def edit_profile_user():
     user = User.objects(id = session["user"]['id']).first()
 
@@ -95,8 +95,8 @@ def edit_profile_user():
 
 
 @user_bp.route('/user/change_password', methods=['GET', 'POST'])
-@maintenance
 @login_required
+@maintenance
 @disable_user
 def change_password():
 

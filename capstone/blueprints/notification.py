@@ -10,8 +10,8 @@ from bson import ObjectId
 notification_bp = Blueprint('notification', __name__)
 
 @notification_bp.route('/notification/review_buy_request', methods=['POST', 'GET'])
-@maintenance
 @login_required
+@maintenance
 @disable_user
 def review_buy_request():
 
@@ -29,8 +29,8 @@ def review_buy_request():
     return render_template("notification/view-my-buy-request.html" , my_buy_requests = my_buy_requests)
 
 @notification_bp.route('/notification/<item_id>/approve_buy_request/<request_id>', methods=['POST', 'GET'])
-@maintenance
 @login_required
+@maintenance
 @disable_user
 def approve_buy_request(item_id,request_id ):
 
@@ -52,8 +52,8 @@ def approve_buy_request(item_id,request_id ):
     return redirect(url_for('notification.review_buy_request'))
 
 @notification_bp.route('/notification/<item_id>/decline_request/<request_id>', methods=['POST', 'GET'])
-@maintenance
 @login_required
+@maintenance
 @disable_user
 def decline_request(item_id,request_id):
 
@@ -74,8 +74,8 @@ def decline_request(item_id,request_id):
 
 
 @notification_bp.route('/review_upgrade_requests', methods=['POST', 'GET'])
-@maintenance
 @login_required
+@maintenance
 @disable_user
 def review_upgrade_requests():
 
@@ -90,8 +90,8 @@ def review_upgrade_requests():
 
 
 @notification_bp.route('/approve_upgrade_request/<request_id>', methods=['POST', 'GET'])
-@maintenance
 @login_required
+@maintenance
 @disable_user
 def approve_upgrade_request(request_id):
 
@@ -108,8 +108,8 @@ def approve_upgrade_request(request_id):
 
 
 @notification_bp.route('/decline_upgrade_request/<request_id>', methods=['POST', 'GET'])
-@maintenance
 @login_required
+@maintenance
 @disable_user
 def decline_upgrade_request(request_id):
 
