@@ -16,6 +16,7 @@ profile_bp = Blueprint('profile', __name__)
 @maintenance
 @disable_user
 def profile():
+    """This function displays the logged in user's information."""
 
     user = User.objects(id = session["user"]['id']).first()
 
@@ -26,6 +27,8 @@ def profile():
 @maintenance
 @disable_user
 def display_users():
+    """This function sets the "disable" attribute of the user to "True".
+    Such user can't access anything on the site (because of the decorator)."""
     
     items = Item.objects()
     seller_user = User.objects(role = 1)
@@ -40,6 +43,7 @@ def display_users():
 @maintenance
 @disable_user
 def remove_user(user_id):
+    """This function removes the user specified from the database."""
 
     User.objects(id = user_id).first().delete()
 
@@ -50,6 +54,8 @@ def remove_user(user_id):
 @maintenance
 @disable_user    
 def disable_user_list(user_id) :
+    """This function sets the "disable" attribute of the user to "True".
+    Such user can't access anything on the site (because of the decorator)."""
     
     user = User.objects(id = user_id).first()
     
@@ -64,6 +70,8 @@ def disable_user_list(user_id) :
 @maintenance 
 @disable_user   
 def unlock_disable_user_user_list(user_id) :
+    """This function sets the "disable" attribute of the user to "False".
+    Such user can now use the site as usual with no restrictions.""" 
     
     user = User.objects(id = user_id).first()
     
@@ -81,6 +89,8 @@ def unlock_disable_user_user_list(user_id) :
 @maintenance
 @disable_user    
 def maintenance_mode() :
+    """This function sets the "maintenance" attribute of all users to "True".
+    All users will see the Maintenance Page when trying to access any page on the site."""
 
     User.objects(role = 0 and 1).update(maintenance = True) 
     
@@ -92,6 +102,8 @@ def maintenance_mode() :
 @maintenance
 @disable_user    
 def remove_maintenance_mode() :
+    """This function sets the "maintenance" attribute of all users to "False".
+    All users will be able to access any page on the site normally."""
     
     User.objects(role = 0 and 1).update(maintenance = False) 
     
@@ -102,6 +114,7 @@ def remove_maintenance_mode() :
 @maintenance
 @disable_user
 def view_favorite():
+    """This function lets the Buyer user see their favorited items."""
 
     favorite_items = User.objects(id = session['user']['id']).get().favorites
     
@@ -120,6 +133,7 @@ def view_favorite():
 @maintenance  
 @disable_user
 def disabled_list():
+    """This function can be accessed by the Admin user to view which users they have locked(disable)."""
 
     users = User.objects(disable = True)
 
@@ -131,6 +145,7 @@ def disabled_list():
 @maintenance
 @disable_user 
 def buy_request_list(user_id):
+    """This function is accessed by the Buyer user to view their Buy Requests and their status."""
 
 
     list_request = BuyRequest.objects(user = session['user']['id'])
@@ -143,6 +158,7 @@ def buy_request_list(user_id):
 @maintenance 
 @disable_user
 def request_upgrade():
+    """This function is available for the Admin user to preview Upgrade Requests to choose to Approve or Decline."""
 
     request = UpgradeRequest.objects(user = session['user']['id']).first()
 
@@ -164,6 +180,8 @@ def request_upgrade():
 @maintenance
 @disable_user
 def add_category():
+    """This function is accessed by the Admin only, it lets them add a new category for items.
+    The changes made here can be viewed when a Seller user chooses a category when adding a new item."""
 
     add_category_form = AddCategoryForm()
 

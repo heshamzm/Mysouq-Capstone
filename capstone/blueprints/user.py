@@ -12,6 +12,9 @@ user_bp = Blueprint('user', __name__)
 
 # define the decorator
 def login_required(function):
+    """Login Decorator: 
+    This function checks whether the user is logged in before accessing a functionality.
+    If not; the user is taken to the Login Page."""
     @wraps(function)
     def check_required(*args, **kwargs):
 
@@ -27,6 +30,9 @@ def login_required(function):
 
 
 def disable_user(function):
+    """Disable Decorator: 
+    This function checks whether the user "disable" attribute is set to "False" before accessing a functionality.
+    If not; then the admin account has set this user's "disable" to "True" and is taken to the Disable Page."""
     @wraps(function)
     def check(*args, **kwargs):
 
@@ -43,6 +49,9 @@ def disable_user(function):
 
 
 def maintenance(function):
+    """Maintenance Decorator: 
+    This function checks whether the user "maintenance" attribute is set to "False" before accessing a functionality.
+    If not; then the admin account has set all users' "maintenance" to "True" and are taken to the Maintenance Page."""
     @wraps(function)
     def check(*args, **kwargs):
 
@@ -66,6 +75,7 @@ def maintenance(function):
 @login_required
 @disable_user
 def edit_profile_user():
+    """This function provides the user with a form to edit their information."""
     user = User.objects(id = session["user"]['id']).first()
 
     edit_profile_form = EditProfile()
@@ -99,6 +109,8 @@ def edit_profile_user():
 @maintenance
 @disable_user
 def change_password():
+    """This function allows the user to change/update their password
+    It is a seperate functionality from "Edit Profile" for extra validation and seperation of concerns."""
 
     user = User.objects(id=session['user']['id']).first()
 

@@ -33,6 +33,8 @@ def review_buy_request():
 @maintenance
 @disable_user
 def approve_buy_request(item_id,request_id ):
+    """This function sets the "status" of a Buy Request to 'Approved'.
+    Also, sets the "sold" attribute of the item to 'True'."""
 
     item = Item.objects(id = item_id).first()
     item.sold = True
@@ -56,6 +58,7 @@ def approve_buy_request(item_id,request_id ):
 @maintenance
 @disable_user
 def decline_request(item_id,request_id):
+    """This function sets the "status" of a Buy Request to 'Declined'."""
 
    
     Item.objects(id = item_id).update_one(unset__buy_request_list = request_id)
@@ -78,6 +81,7 @@ def decline_request(item_id,request_id):
 @maintenance
 @disable_user
 def review_upgrade_requests():
+    """This function is available for the Admin user to preview Upgrade Requests to choose to Approve or Decline."""
 
     users = User.objects()
 
@@ -94,6 +98,8 @@ def review_upgrade_requests():
 @maintenance
 @disable_user
 def approve_upgrade_request(request_id):
+    """This function sets the "status" of an Upgrade Request to 'Approved'.
+    Also, sets the "role" of the user to '1' (Seller)."""
 
     request = UpgradeRequest.objects(id = request_id).first()
     request.status = "Approved"
@@ -112,6 +118,8 @@ def approve_upgrade_request(request_id):
 @maintenance
 @disable_user
 def decline_upgrade_request(request_id):
+    """This function sets the "status" of an Upgrade Request to 'Declined'.
+    Also, sets the "role" of the user to '0' (Buyer). Just in case the Admin changed their mind """
 
     request = UpgradeRequest.objects(id = request_id).first()
     request.status = "Declined"
