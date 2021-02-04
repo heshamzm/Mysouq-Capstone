@@ -15,10 +15,12 @@ def login_required(function):
     @wraps(function)
     def check_required(*args, **kwargs):
 
-        if  session['user']['id'] :
+        try:  
+            session['user']['id'] 
             return function(*args, **kwargs)
 
-        else:
+        except:
+            
             return redirect(url_for('login.login'))
 
     return check_required
@@ -28,11 +30,15 @@ def disable_user(function):
     @wraps(function)
     def check(*args, **kwargs):
 
-        if session['user']['disable'] == False:
-            return function(*args, **kwargs)
+        try:
+            if session['user']['disable'] == False :
+                return function(*args, **kwargs)
 
-        else:
+            else :
+                return render_template('user/disable.html')
+        except:
             return render_template('user/disable.html')
+    
     return check
 
 
@@ -40,21 +46,25 @@ def maintenance(function):
     @wraps(function)
     def check(*args, **kwargs):
 
-        if session['user']['maintenance'] == False:
-            return function(*args, **kwargs)
+        try:
+            if session['user']['maintenance'] == False:
+                return function(*args, **kwargs)
 
-        else:
+            else :
+                return render_template('user/maintenance.html')
+
+        except:
             return render_template('user/maintenance.html')
+    
     return check
 
 
 
 
-
 @user_bp.route('/user/edit_profile', methods=['POST', 'GET'])
-@maintenance
-@login_required
-@disable_user
+# @maintenance
+# @login_required
+# @disable_user
 def edit_profile_user():
     user = User.objects(id = session["user"]['id']).first()
 
@@ -62,16 +72,16 @@ def edit_profile_user():
     
     if request.method == "GET":
 
-        edit_profile_form.new_first_name.data = session['user']['first_name']
-        edit_profile_form.new_last_name.data = session['user']['last_name']
+        edit_profile_form.new_first_name.data = session['user']['firstname']
+        edit_profile_form.new_last_name.data = session['user']['lastname']
     
     if  edit_profile_form.validate_on_submit():
 
         new_first_name = edit_profile_form.new_first_name.data
         new_last_name = edit_profile_form.new_last_name.data
     
-        user.first_name = new_first_name
-        user.last_name = new_last_name
+        user.firstname = new_first_name
+        user.lastname = new_last_name
         
 
         user.save()
@@ -80,7 +90,7 @@ def edit_profile_user():
 
         return redirect(url_for('home.home')) 
 
-    return render_template("profile/edit-profile.html", form = edit_profile_form)
+    return render_template("user/edit-profile.html", form = edit_profile_form)
 
 
 
@@ -106,7 +116,7 @@ def change_password():
             flash("Your password has been successfully changed.")
             return redirect(url_for('user.change_password'))
 
-    return render_template("profile/change-password.html", form=change_password_form)
+    return render_template("user/change-password.html", form=change_password_form)
 
 
 

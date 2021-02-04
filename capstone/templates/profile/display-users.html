@@ -5,18 +5,18 @@
 <!-- content block -->
 {% block main %}
 
-<center>
 
-    <div>
-        <div class="col-lg-4 col-md-6 col-sm-12">
-            <h2><i class="{{icon}}"></i>{{title}}</h2>
-        </div>
-    </div>
-</center>
 
 <center>
     <br>
-    <div id="b1">
+    <br>
+    <br>
+    <h1><b>Users</b></h1>
+    <br>
+    <div class="alert alert-warning" role="alert">
+        Users : {{users | count}} - Buyer : {{buyer_user | count}} - Seller : {{seller_user | count}} - Items : {{items | count}}
+      </div>
+    
         <div class="col-lg-10 col-md-6 col-lg">
     <table class="table">
         <thead>
@@ -38,12 +38,12 @@
 
                 <th scope="row">{{loop.index}}</th>
                 <td>{{user.username}}</td>
-                <td>{{user.first_name}}</td>
-                <td>{{user.last_name}}</td>
+                <td>{{user.firstname}}</td>
+                <td>{{user.lastname}}</td>
                 <td>{{user.email}}</td>
                 <td>
-                    <a href="{{url_for('profile.remove_user' , user_id = user.id)}}"><i class="fas fa-user-times ml-4" title="Remove-User"></i></a>
-                    <a href="{{url_for('profile.disable_user_list' , user_id = user.id)}}"> <i class="fas fa-user-slash" title="Disable-User"></i></a>
+                    <a role="button" class="btn btn-outline-secondary" href="{{url_for('profile.remove_user' , user_id = user.id)}}">delete<i class="fas fa-user-times ml-4" title="Remove-User"></i> </a>
+                    <a role="button" class="btn btn-outline-secondary" href="{{url_for('profile.disable_user_list' , user_id = user.id)}}">block   <i class="fas fa-user-slash" title="Disable-User"></i></a>
                 </td>
 
             </tr>
@@ -51,7 +51,7 @@
 
         </tbody>
     </table>
-    <a href="{{url_for('profile.disabled_list')}}"><button type="button" class="btn btn-primary">Block-Users-List</button></a>
+    <a href="{{url_for('profile.disabled_list')}}"><button type="button" class="btn btn-outline-secondary">Blocked Users List</button></a>
 
    </div></div>
 </center>

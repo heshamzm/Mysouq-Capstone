@@ -8,25 +8,28 @@
 <!-- content block -->
 {% block main %}
 <center>
+  <br>
+  <br>
+  <br>
   <h1><b>Add Item</b></h1>
   <div class="class=col-lg-4 col-md-6 col-sm-12">
     <form method="POST" action="">
       {{form.hidden_tag()}}
       <div class="row my-3">
         {{form.title.label(class_="input-group-text")}}
-        {{form.title(class_="form-control"}}
+        {{form.title(class_="form-control")}}
       </div>
       <div class="row my-3">
         {{form.description.label(class_="input-group-text")}}
-        {{form.description(class_="form-control"}}
+        {{form.description(class_="form-control")}}
       </div>
       <div class="row my-3">
         {{form.price.label(class_="input-group-text")}}
-        {{form.price(class_="form-control"}}
+        {{form.price(class_="form-control")}}
       </div>
       <div class="row my-3">
         {{form.category.label(class_="input-group-text")}}
-        {{form.category(class_="form-control"}}
+        {{form.category(class_="form-control")}}
       </div>
 
 

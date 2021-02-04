@@ -26,7 +26,7 @@ def review_buy_request():
  
     
 
-    return render_template("notifications/review-my-buy-request.html" , my_buy_requests = my_buy_requests)
+    return render_template("notification/view-my-buy-request.html" , my_buy_requests = my_buy_requests)
 
 @notification_bp.route('/notification/<item_id>/approve_buy_request/<request_id>', methods=['POST', 'GET'])
 @maintenance
@@ -49,7 +49,7 @@ def approve_buy_request(item_id,request_id ):
     Item.objects(id = item_id).update_one(pull__buy_request_list = request_id)
     
 
-    return redirect(url_for('notifications.view_buy_request'))
+    return redirect(url_for('notification.review_buy_request'))
 
 @notification_bp.route('/notification/<item_id>/decline_request/<request_id>', methods=['POST', 'GET'])
 @maintenance
@@ -66,7 +66,7 @@ def decline_request(item_id,request_id):
 
     flash("Buy Request has been Declined!")
     
-    return redirect(url_for('notifications.view_buy_request'))
+    return redirect(url_for('notification.review_buy_request'))
 
 
 # upgrade requests functions
@@ -86,13 +86,13 @@ def review_upgrade_requests():
     for user in users:
         upgrade_requests.append(UpgradeRequest.objects(user = user).all())
 
-    return render_template("notifications/review_upgrade_requests.html", upgrade_requests = upgrade_requests)
+    return render_template("notification/view-upgrades-requests.html", upgrade_requests = upgrade_requests)
 
 
 @notification_bp.route('/approve_upgrade_request/<request_id>', methods=['POST', 'GET'])
-# @maintenance
-# @login_required
-# @disable_user
+@maintenance
+@login_required
+@disable_user
 def approve_upgrade_request(request_id):
 
     request = UpgradeRequest.objects(id = request_id).first()
@@ -104,13 +104,13 @@ def approve_upgrade_request(request_id):
     
     flash("Upgrade Request has been approved.")
 
-    return redirect(url_for("notifications.review_upgrade_requests"))
+    return redirect(url_for("notification.review_upgrade_requests"))
 
 
 @notification_bp.route('/decline_upgrade_request/<request_id>', methods=['POST', 'GET'])
-# @maintenance
-# @login_required
-# @disable_user
+@maintenance
+@login_required
+@disable_user
 def decline_upgrade_request(request_id):
 
     request = UpgradeRequest.objects(id = request_id).first()
@@ -120,4 +120,4 @@ def decline_upgrade_request(request_id):
     flash("Upgrade Request has been declined.")
     
 
-    return redirect(url_for("notifications.review_upgrade_requests"))
+    return redirect(url_for("notification.review_upgrade_requests"))

@@ -19,17 +19,11 @@ class AddItemForm(FlaskForm):
 
 class EditItemForm(FlaskForm):
 
-    new_title = StringField("Title: ", [validators.InputRequired()])
-
-    new_description = TextAreaField("Description: ", [validators.InputRequired()])
-
-    new_price = FloatField("Price: ", [validators.InputRequired()])
-
+    title = StringField("Title: ", [validators.InputRequired()])
+    description = TextAreaField("Description: ", [validators.InputRequired()])
+    price = FloatField("Price: ", [validators.InputRequired()])
     category = SelectField(u'Category')
-
-    new_image = FileField()
-
-    submit = SubmitField("Edit Item")    
+    submit = SubmitField("Edit Item")     
 
 
 class AddCategoryForm(FlaskForm):

@@ -26,10 +26,13 @@ def profile():
 @login_required
 @disable_user
 def display_users():
-
+    
+    items = Item.objects()
+    seller_user = User.objects(role = 1)
+    buyer_user = User.objects(role = 0)
     users = User.objects()
 
-    return render_template('profile/display-users.html' , users = users)
+    return render_template('profile/display-users.html' , buyer_user = buyer_user , seller_user = seller_user , users = users , items = items)
 
 
 @profile_bp.route('/remove_user/<user_id>', methods=['POST', 'GET'])

@@ -17,9 +17,11 @@ home_bp = Blueprint('home', __name__)
 @disable_user
 def home():
 
+    user = User.objects()
+
     items = Item.objects()
 
-    return render_template('item/home.html', items = items)
+    return render_template('item/home.html',user = user , items = items)
 
 
 @home_bp.route("/item/search", methods=['POST'])
@@ -65,9 +67,9 @@ def add_item():
     return render_template("item/add-item.html", form = add_item_form)
 
 @home_bp.route('/user/edit_item/<item_id>', methods=['GET', 'POST'])
-@maintenance
-@login_required
-@disable_user
+# @maintenance
+# @login_required
+# @disable_user
 def edit_item(item_id):
 
     edit_item_form = EditItemForm()
@@ -80,21 +82,32 @@ def edit_item(item_id):
 
     if request.method == "GET":
 
-        edit_item_form.new_title.data = item.title
-        edit_item_form.new_description.data = item.description
-        edit_item_form.new_price.data = item.price
+        edit_item_form.title.data = item.title
+        edit_item_form.description.data = item.description
+        edit_item_form.price.data = item.price
         edit_item_form.category.data = item.category
+
 
     if edit_item_form.validate_on_submit():
 
-        item.title = edit_item_form.new_title.data
-        item.description = edit_item_form.new_description.data
-        item.price = edit_item_form.new_price.data
-        item.category = edit_item_form.category.data
-        
-        item.save()
+        item_user = item.user
 
-        flash("Your item has been successfully edit.")
+        user = User.objects(id = session['user']['id']).first()
+
+        if user == item_user :
+
+            item.title = edit_item_form.title.data
+            item.description = edit_item_form.description.data
+            item.price = edit_item_form.price.data
+            item.category = edit_item_form.category.data
+            
+            item.save()
+
+            flash("Your item has been edited successfully.")
+
+        else:
+
+            flash("Action Not Allowed: Editing an item you don't own.")
 
         return redirect(url_for('home.home'))
 
@@ -107,7 +120,21 @@ def edit_item(item_id):
 @disable_user
 def delete_item(item_id):
 
-    Item.objects(id = item_id).first().delete()
+    item = Item.objects(id = item_id).first() 
+
+    item_user = item.user
+
+    user = User.objects(id = session['user']['id']).first()
+
+    if user == item_user :
+
+        Item.objects(id = item_id, user = session['user']['id']).first().delete()
+
+        flash('Item has been deleted')
+
+    else: 
+
+        flash("Action Not Allowed: Deleting an item you don't own.")
 
     return redirect(url_for("home.home"))
 
@@ -141,14 +168,23 @@ def sort_price_items():
 def buy_item(item_id):
 
 
-    buy_request = BuyRequest(user = session['user']['id'] , item = item_id , status = 'pending')
-    buy_request.save()
-    
-    buy_requests = BuyRequest.objects()
+    request = BuyRequest.objects(user = session['user']['id'], item = item_id).first()
 
-    Item.objects(id = item_id).update_one(add_to_set__buy_request_list = buy_request.id)
+    if not request:
 
-    return redirect(url_for('home.home', buy_requests = buy_requests))
+        buy_request = BuyRequest(user = session['user']['id'], item = item_id, status = 'Pending')
+
+        buy_request.save()
+        
+        Item.objects(id = item_id).update_one(add_to_set__buy_request_list = buy_request.id)
+
+        flash("A Buy Requests has been Sent. !:)")
+
+
+    else:
+        flash("Item already in you Buy-Requests.")
+
+    return redirect(url_for('home.home', buy_request = buy_request))
 
 
 @home_bp.route('/item/<item_id>/favorite')
@@ -160,3 +196,14 @@ def add_favorite(item_id):
     User.objects(id = session['user']['id']).update_one(add_to_set__favorites = item_id)
     flash("Added as favorite.")
     return redirect(url_for('home.home'))
+
+
+@home_bp.route('/item/<item_id>/remove_favorite')
+@login_required
+@disable_user
+@maintenance
+def remove_from_favorite(item_id):
+
+    User.objects(id = session['user']['id']).update_one(pull__favorite = item_id)
+    flash("Removed from favorite !:)")
+    return redirect(url_for('profile.profile'))

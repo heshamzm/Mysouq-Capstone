@@ -19,7 +19,7 @@
   <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
     <ul class="navbar-nav ml-6 topnav">
       <li class="nav-item">
-        <h1 class="navbar-brand" ><i class="far fa-flag"></i> My Souq</h1>
+        <h1 class="navbar-brand"><i class="far fa-flag"></i> My Souq</h1>
       </li>
       {% if session ['user'] %}
       <li class="nav-item">
@@ -28,10 +28,8 @@
       <li class="nav-item">
         <a class="navbar-brand" href="{{url_for('profile.profile')}}">Profile</a>
       </li>
-      <li class="nav-item">
-        <a class="navbar-brand" href="#">Notification</a>
-      </li>
-      {% endif %} 
+
+      {% endif %}
     </ul>
 
     <ul class="navbar-nav ml-auto topnav">
@@ -42,39 +40,37 @@
       <li class="nav-item">
         <a type="button" href="{{url_for('signup.signup')}}" role="button" class="btn btn-info"> Sign up</a>
       </li>
-      {% endif %} 
+      {% endif %}
       {% if session ['user'] %}
       <li class="nav-item">
         <a type="button" href="{{url_for('login.logout')}}" role="button" class="btn btn-danger">Log out</a>
       </li>
-      {% endif %} 
+      {% endif %}
     </ul>
   </nav>
+  <section class="container my-5">
+      {% for message in get_flashed_messages() %}
+      <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <strong>Attention !</strong> {{message}}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      {% endfor %}
+    </section>
+    
   {%block main%}
   {%endblock%}
 
-  <footer class="footer mt-auto py-3 bg-dark">
+  <footer class="footer mt-auto py-3 bg-dark"
+    style="background-color:gray; padding: 20px; position: fixed; left: 0; bottom: 0; width: 100%; text-align: center;">
     <div class="container">
       <span class="" style="color:rgb(245, 239, 239);">Place sticky footer content here.</span>
     </div>
   </footer>
 
+
 </body>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

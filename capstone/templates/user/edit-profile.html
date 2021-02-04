@@ -5,20 +5,27 @@
 {% endblock %}
 
 {% block main %}
-<h1><b>Edit Profile</b></h1>
-<div class="class=col-lg-4 col-md-6 col-sm-12">
-  <form method="POST" action="">
-    {{form.hidden_tag()}}
-    <div class="row my-3">
-      {{form.firstname.label(class_="input-group-text")}}
-      {{form.firstname( class_="form-control")}}
-    </div>
-    <div class="row my-3">
-      {{form.lastname.label(class_="input-group-text")}}
-      {{form.lastname( class_="form-control")}}
-    </div>
-    {{form.submit}}
-  </form>
-</div>
+<center>
+  <br>
+  <br>
+  <br>
+  <h1><b>Edit Profile</b></h1>
+
+  <br>
+  <div class="class=col-lg-4 col-md-6 col-sm-12">
+    <form method="POST" action="">
+      {{form.hidden_tag()}}
+      <div class="row my-3">
+        {{form.new_first_name.label(class_="input-group-text")}}
+        {{form.new_first_name( class_="form-control")}}
+      </div>
+      <div class="row my-3">
+        {{form.new_last_name.label(class_="input-group-text")}}
+        {{form.new_last_name( class_="form-control")}}
+      </div>
+      {{form.submit(class_="btn btn-outline-secondary")}}
+    </form>
+  </div>
+</center>
 
 {% endblock %}

@@ -7,71 +7,128 @@
 
 
 <center>
-    <h1><b>{{user.username}}' profile</b></h1>
-    
+    <br>
+    <br>
+    <br>
+    <br>
+    <h1><b>{{user.username}}'s profile</b></h1>
     {% if session['user']['role'] == 0 %}
+    <div class="container-fluid mt-5">
+        <div class="col mx-auto card bg-light p-5">
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon3">View your items favorite list.</span>
+                <a href="{{url_for('profile.view_favorite')}}"><button type="button"
+                        class="btn btn-outline-secondary">Favorites-List</button></a>
+            </div>
+            <br>
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon3">View your buy request list.</span>
+                <a href="{{url_for('profile.buy_request_list', user_id = user.id)}}"><button type="button"
+                        class="btn btn-outline-secondary">Buy
+                        Requests</button></a>
+            </div>
+            <br>
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon3">Upgrade your profile to a seller!</span>
+                <a href="{{url_for('profile.request_upgrade')}}"><button type="button"
+                        class="btn btn-outline-secondary">Upgrade Request</button></a>
+            </div>
 
-    <div class="input-group mb-3">
-        <span class="input-group-text" id="basic-addon3">Favorites-List</span>
-        <a href="{{url_for('profile.view_favorite')}}"><button type="button"
-                class="btn btn-outline-secondary">Favorites-List</button></a>
+            <br>
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon3">Edit your Profile</span>
+                <a href="{{url_for('user.edit_profile_user')}}"> <button type="button"
+                        class="btn btn-outline-secondary">Edit
+                        Profile</button></a>
+            </div>
+            <br>
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon3">Change your Password</span>
+                <a href="{{url_for('user.change_password')}}"><button type="button"
+                        class="btn btn-outline-secondary">Change
+                        Password</button></a>
+            </div>
+        </div>
     </div>
-
-    <div class="input-group mb-3">
-        <span class="input-group-text" id="basic-addon3">Your-Buy-Requests</span>
-        <a href="{{url_for('profile.request_upgrade')}}"><button type="button"
-                class="btn btn-outline-secondary">Your-Buy-Requests</button></a>
-    </div>
-
-    <div class="input-group mb-3">
-        <span class="input-group-text" id="basic-addon3">Upgrade-Request</span>
-        <a href="{{url_for('profile.request_upgrade')}}"><button type="button"
-                class="btn btn-outline-secondary">Upgrade-Request</button></a>
-    </div>
+    <br>
 
     {% endif %}
 
-    {% if session['user']['role'] == 1 and session['user']['role'] == 0 %}
+    {% if session['user']['role'] == 1 %}
+    <div class="container-fluid mt-5">
+        <div class="col mx-auto card bg-light p-5">
 
-    <div class="input-group mb-3">
-        <span class="input-group-text" id="basic-addon3">Edit-Profile</span>
-        <a href="{{url_for('user.edit_profile_user')}}"> <button type="button"
-                class="btn btn-outline-secondary">Edit-Profile</button></a>
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon3">Edit your Profile</span>
+                <a href="{{url_for('user.edit_profile_user')}}"> <button type="button"
+                        class="btn btn-outline-secondary">Edit Profile</button></a>
+            </div>
+            <br>
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon3">Change your Password</span>
+                <a href="{{url_for('user.change_password')}}"><button type="button"
+                        class="btn btn-outline-secondary">Change
+                        Password</button></a>
+            </div>
+            <br>
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon3">Edit your Profile</span>
+                <a href="{{url_for('notification.review_buy_request')}}"> <button type="button"
+                        class="btn btn-outline-secondary">Review Buy requests</button></a>
+            </div>
+            <br>
+        </div>
     </div>
+    
+    
+    
+   
 
-    <div class="input-group mb-3">
-        <span class="input-group-text" id="basic-addon3">Change-Password</span>
-        <a href="{{url_for('user.change_password')}}"><button type="button"
-                class="btn btn-outline-secondary"></button></a>
-    </div>
 
     {% endif %}
 
     {% if session['user']['role'] == 2 %}
 
-    <div class="input-group mb-3">
-        <span class="input-group-text" id="basic-addon3">Display-Users</span>
-        <a href="{{url_for('profile.display_users')}}"><button type="button"
-                class="btn btn-outline-secondary">Display-Users</button></a>
+    <div class="container-fluid mt-5">
+        <div class="col mx-auto card bg-light p-5">
+
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon3">Display all users in this web site.</span>
+                <a href="{{url_for('profile.display_users')}}"><button type="button"
+                        class="btn btn-outline-secondary">Display Users</button></a>
+            </div>
+            <br>
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon3">Display users who wants to be a seller.</span>
+                <a href="{{url_for('notification.review_upgrade_requests')}}"><button type="button"
+                        class="btn btn-outline-secondary">Display upgrade requests</button></a>
+            </div>
+            <br>
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon3">Add new categories so can users choose more
+                    .</span>
+                <a href="{{url_for('profile.add_category')}}"><button type="button"
+                        class="btn btn-outline-secondary">Add
+                        Category</button></a>
+            </div>
+            <br>
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon3">change the website in maintanance mode !</span>
+                <a href="{{url_for('profile.maintenance_mode')}}"><button type="button"
+                        class="btn btn-outline-danger">Maintenance On</button></a>
+            </div>
+            <br>
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon3">Turn off maintenance mode </span>
+                <a href="{{url_for('profile.remove_maintenance_mode')}}"><button type="button"
+                        class="btn btn-outline-success">Maintenance Off</button></a>
+            </div>
+        </div>
     </div>
 
-    <div class="input-group mb-3">
-        <span class="input-group-text" id="basic-addon3">Add-Category</span>
-        <a href="{{url_for('profile.request_upgrade')}}"><button type="button"
-                class="btn btn-outline-secondary">Add-Category</button></a>
-    </div>
 
-    <div class="input-group mb-3">
-        <span class="input-group-text" id="basic-addon3">Maintanance-On</span>
-        <a href="{{url_for('profile.request_upgrade')}}"><button type="button"
-                class="btn btn-outline-secondary">Maintanance-On</button></a>
-    </div>
+ 
 
-    <div class="input-group mb-3">
-        <span class="input-group-text" id="basic-addon3">Maintanance-Off</span>
-        <a href="{{url_for('profile.request_upgrade')}}"><button type="button"
-                class="btn btn-outline-secondary">Maintanance-Off</button></a>
-    </div>
 
     {% endif %}
 

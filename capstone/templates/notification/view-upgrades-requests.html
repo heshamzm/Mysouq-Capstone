@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+<!-- title -->
+{% block title %}review-Upgrades-requests{% endblock %}
+
+<!-- content block -->
+{% block main %}
+
+<center>
+  <br>
+  <br>
+  <br>
+  <br>
+  <h1><b>Upgrades Requests</b></h1>
+  <br>
+  <div class="container">
+    <div class="row align-items-start">
+  {% for user_request in upgrade_requests %}
+  {% for request in user_request %}
+  <div class="col">
+
+  <div class="card" style="width: 18rem;">
+    <img class="card-img-top" src="../../static/1.jpg" alt="Card image cap">
+    <div class="card-body">
+      
+      
+      <p class="card-text">
+      <h5><b>User : </b>{{request.user.username}}</h5>
+      <hr style="height:2px;border-width:0;color:gray;background-color:gray">
+      <h5><b>Status : </b>{{request.status}}</h5>
+      <hr style="height:2px;border-width:0;color:gray;background-color:gray">
+      <a href="{{url_for('notification.approve_upgrade_request', request_id = request.id)}}"><button type="button"
+          class="btn btn-outline-secondary">Approve</button></a>
+      <a href="{{url_for('notification.decline_upgrade_request', request_id = request.id)}}"><button type="button"
+      class="btn btn-outline-danger">Dicline</button></a>
+
+    </div>
+  </div>
+</div>
+
+  <br>
+  {% endfor %}
+  {% endfor %}
+</div>
+</div>
+  <br>
+  <br>
+</center>
+
+
+{% endblock %}
